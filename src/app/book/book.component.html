@@ -1,0 +1,66 @@
+<div class="container">
+<div class="row">
+<h4>Angular CRUD With Book</h4>
+</div>
+  <div class="row">
+    <form [formGroup]="bookForm" (ngSubmit)="saveBook()">
+        <div class="form-floating mb-3">
+            <input type="text" readonly class="form-control" formControlName="id"   id="id" name="id" placeholder="Book id" >
+            <label for="floatingInput">Book Id</label>
+            <small class="text-secondart">this is readonly field</small>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" required class="form-control" formControlName="name" id="name" name="name" placeholder="Book Name" >
+            <label for="floatingInput">Book Name</label>
+            <small class="text-danger" *ngIf="name?.invalid && name?.touched">Name is required</small>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" required class="form-control" formControlName="author" id="author" name="author" placeholder="Book Author" >
+            <label for="floatingInput">Book Author</label>
+            <small class="text-danger" *ngIf="author?.invalid && author?.touched">Author is required</small>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" required class="form-control" formControlName="price" id="price" name="price" placeholder="Book Price" >
+            <label for="floatingInput">Book Price</label>
+            <small class="text-danger" *ngIf="price?.invalid && price?.touched">Price is required</small>
+        </div>
+        <div class="form-floating mb-3">
+         <input type="submit" *ngIf="!isUpdatedBtn" [disabled]="bookForm.invalid" class="btn btn-primary" value="Add" />
+         <input type="submit" *ngIf="isUpdatedBtn" [disabled]="bookForm.invalid"  class="btn btn-primary" value="Update" />
+         <input type="submit" class="btn btn-seconday" value="Cancel" (click)="clearForm()"/>
+        </div>
+    </form>
+   </div>
+</div>
+
+<br/>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let b of bookList">
+                    <td>{{b.id}}</td>
+                    <td>{{b.name }}</td>
+                    <td>{{b.author }}</td>
+                    <td>{{b.price}}</td>
+             
+                <td>
+                    <input type="button" class="btn btn-warning" value="Edit" (click)="edit(b)" /> 
+                    <input type="button" class="btn btn-danger" value="Delete" (click)="delete(b.id)" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

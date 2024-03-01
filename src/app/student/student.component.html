@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+    <h4>Angular CRUD With Student</h4>
+    </div>
+      <div class="row">
+        <form [formGroup]="studForm" (ngSubmit)="saveStudent()">
+            <div class="form-floating mb-3">
+                <input type="text" readonly class="form-control" formControlName="id"  id="id" name="id" placeholder="Student id" >
+                <label for="floatingInput">Student Id</label>
+                <small class="text-secondart">this is readonly field</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="name" id="name" name="name" placeholder="Student Name" >
+                <label for="floatingInput">Student Name</label>
+                <small class="text-danger" *ngIf="name?.invalid && name?.touched">Name is required</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="city" id="city" name="city" placeholder="City" >
+                <label for="floatingInput">City</label>
+                <small class="text-danger" *ngIf="city?.invalid && city?.touched">city is required</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="percentage" id="percentage" name="percentage" placeholder="percentage" >
+                <label for="floatingInput">Percentage</label>
+                <small class="text-danger" *ngIf="percentage?.invalid && percentage?.touched">Percentage is required</small>
+            </div>
+            <div class="form-floating mb-3">
+             <input type="submit" *ngIf="!isUpdatedBtn" [disabled]="studForm.invalid" class="btn btn-primary" value="Add" />
+             <input type="submit" *ngIf="isUpdatedBtn" [disabled]="studForm.invalid"  class="btn btn-primary" value="Update" />
+             <input type="submit" class="btn btn-seconday" value="Cancel" (click)="clearForm()"/>
+            </div>
+        </form>
+       </div>
+    </div>
+    
+    <br/>
+    
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Percentage</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let s of studList">
+                        <td>{{s.id}}</td>
+                        <td>{{s.name }}</td>
+                        <td>{{s.city }}</td>
+                        <td>{{s.percentage}}</td>
+                 
+                    <td>
+                        <input type="button" class="btn btn-warning" value="Edit" (click)="edit(s)" /> 
+                        <input type="button" class="btn btn-danger" value="Delete" (click)="delete(s.id)" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    

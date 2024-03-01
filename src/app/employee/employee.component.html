@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+    <h4>Angular CRUD With Employee</h4>
+    </div>
+      <div class="row">
+        <form [formGroup]="empForm" (ngSubmit)="saveEmployee()">
+            <div class="form-floating mb-3">
+                <input type="text" readonly class="form-control" formControlName="id"   id="id" name="id" placeholder="Employee id" >
+                <label for="floatingInput">Employee Id</label>
+                <small class="text-secondart">this is readonly field</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="name" id="name" name="name" placeholder="Employee Name" >
+                <label for="floatingInput">Employee Name</label>
+                <small class="text-danger" *ngIf="name?.invalid && name?.touched">Name is required</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="email" id="email" name="email" placeholder="Email" >
+                <label for="floatingInput">Email</label>
+                <small class="text-danger" *ngIf="email?.invalid && email?.touched">Email is required</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="age" id="age" name="age" placeholder="Age" >
+                <label for="floatingInput">Age</label>
+                <small class="text-danger" *ngIf="age?.invalid && age?.touched">Age is required</small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control" formControlName="salary" id="salary" name="salary" placeholder="salary" >
+                <label for="floatingInput">Salary</label>
+                <small class="text-danger" *ngIf="salary?.invalid && salary?.touched">Salary is required</small>
+            </div>
+            <div class="form-floating mb-3">
+             <input type="submit" *ngIf="!isUpdatedBtn" [disabled]="empForm.invalid" class="btn btn-primary" value="Add" />
+             <input type="submit" *ngIf="isUpdatedBtn" [disabled]="empForm.invalid"  class="btn btn-primary" value="Update" />
+             <input type="submit" class="btn btn-seconday" value="Cancel" (click)="clearForm()"/>
+            </div>
+        </form>
+       </div>
+    </div>
+    
+    <br/>
+    
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Salary</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor=" let e of empList">
+                        <td>{{e.id}}</td>
+                        <td>{{e.name }}</td>
+                        <td>{{e.email }}</td>
+                        <td>{{e.age}}</td>
+                        <td>{{e.salary}}</td>
+                 
+                    <td>
+                        <input type="button" class="btn btn-warning" value="Edit" (click)="edit(e)" /> 
+                        <input type="button" class="btn btn-danger" value="Delete" (click)="delete(e.id)" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
